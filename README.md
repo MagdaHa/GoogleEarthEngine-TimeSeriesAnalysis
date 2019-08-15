@@ -1,1 +1,1 @@
-# GoogleEarthEngine-Time-Series-Analysis
+# GoogleEarthEngine-TimeSeriesAnalysis
