@@ -8,6 +8,8 @@
 
 #loading required packages
 library(ggplot2)
+library(plotly)
+library(ggplot2)
 library(rgdal)
 library(raster)
 library(rasterVis)
@@ -15,12 +17,15 @@ library(maptools)
 library(corrplot)
 library(RStoolbox)
 
+
+setwd ("C:\\02_Studium\\02_Master\\02_Semester_2\\MET3_Python\\01_final_project\\GoogleEarthEngine-TimeSeriesAnalysis")
+
 ##########################################################################################
 # 1.) RASTER STACK TIME SERIES
 # simple display of raster time series, for example indices
 ##########################################################################################
 #loading all NDWI images with the pattern TIF, stored as list
-NDWI <- "D:/01_Uni/02_Master/MB1_Digital Image Analysis and GIS/00_final_project/01_Landsat/NDWI"
+NDWI <- ".\\01_data\\NDWI"
 all_NDWI <- list.files(NDWI, full.names = TRUE, pattern = ".tif$")
 all_NDWI
 
@@ -47,7 +52,7 @@ levelplot(NDWI_stack,
 # 2.) TIME SERIES PLOTS 
 ##########################################################################################
 ###precipitation and evapotranspiration April and July 1989 - 2018
-df_data <- read.csv("D:\\01_Uni\\02_Master\\01_Lake_Poopo\\02_data_tables\\prec_et_april_july.csv", header=T, sep=";")
+df_data <- read.csv(".\\01_data\\prec_et_april_july.csv", header=T, sep=";")
 if(names(df_data)[1]=="ï..YEAR"){             #replaces mysterious column name
   names(df_data)[1]<- "YEAR"
 }
@@ -91,7 +96,7 @@ et_plot
 #     in order to draw further conclusions.
 
 #loading csv
-corr <- read.csv("C:\\02_Studium\\02_Master\\02_Semester_2\\MET3_Python\\df_all_T.csv", header=T, sep=";")
+corr <- read.csv(".\\01_data\\df_all_T.csv", header=T, sep=";")
 
 #------------only necessary of NA values or not required columns ar in the dataset----------
 # only necessary of NA values or not required columns ar in the dataset
@@ -121,11 +126,8 @@ corrplot(res, method="number", tl.col = "black", type="upper", order="hclust", t
 # --> Input file is a csv that consists of different (previously spatial data) variables that are related to each other by time.
 # --> Aim: a simple and clear representation of the variables by time
 
-library(plotly)
-library(ggplot2)
-
 # example1: world population
-data <- read.csv("C:\\02_Studium\\02_Master\\02_Semester_2\\MET2_Deep_Learning_GEE\\world_population.txt")
+data <- read.csv(".\\01_data\\world_population.txt")
 dim(data)
 head(data)
 
@@ -141,7 +143,7 @@ ggplotly(p_plot)
 
 #---------------------------
 #example2: Lake Poopò
-data_P <- read.csv("C:\\02_Studium\\02_Master\\02_Semester_2\\MET3_Python\\df_all_T.csv", header=T, sep=";")
+data_P <- read.csv(".\\01_data\\df_all_T.csv", header=T, sep=";")
 dim(data_P)
 head(data_P)
 
@@ -152,16 +154,7 @@ p_plot_P <- ggplot(data_P, aes(year, area_Poopo, color=height_Titicaca))+
   ggtitle("Correlation between the area of Lake Poopó and water height \nof Lake Titicaca (1989 - 2019)")+
   theme_bw()
   
-p_plot_P
+#p_plot_P
 ggplotly(p_plot_P)
-
-
+         
 ##########################################################################################
-# 5.) RGB plots of different time stamps
-##########################################################################################
-#plot of each scenario with threshold 0.7
-RGB_stack <- raster("D:\\01_Uni\\02_Master\\MET1_Modeling_Prediction\\data\\RGB_stack\\RGB_RCP2_full.tif")
-ggRGB(RGB_stack, r = 1, g = 2, b = 3)+
-  #xlab("test")+
-  ggtitle("Prediction in Caffea Arabica for RCP2, threshold 0.7")+
-  theme_void() # Empty theme without axis lines and texts
