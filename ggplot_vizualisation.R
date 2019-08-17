@@ -171,12 +171,12 @@ corr_plot(corr)
 # --> Aim: a simple and clear representation of the variables by time
 
 #FUNCTION
-anim <- function(data, var1, var2, color, size, year, ids,anim) {
-  plot <- ggplot(data, aes(var1, var2, color=color))+
+anim <- function(data, varx, vary, color, size, year, ids, xlab, ylab) {
+  plot <- ggplot(data, aes(varx, vary, color=color))+
     geom_point(aes(size=size, frame=year, ids=ids))+
     scale_x_log10()+
-    xlab("population")+
-    ylab("life expectation")
+    xlab+
+    ylab
   plotly <- ggplotly(plot)
   return(plotly)
 }
@@ -187,15 +187,17 @@ data <- read.csv(".\\01_data\\world_population.txt")
 dim(data)
 head(data)
 
-var1 <- data[[3]]
-var2 <- data[[5]]
+varx <- data[[3]]
+vary <- data[[5]]
 color <- data[[4]]
 size <- data[[6]]
 year <- data[[2]]
 ids <- data[[1]]
+xlab <- xlab("population")
+ylab <- ylab("life expectation")
 
 
-anim(data, var1, var2, color, size, year, ids)
+anim(data, varx, vary, color, size, year, ids, xlab, ylab)    # press PLAY button in animation
 
 
 #-----------------------------------------------------------------------------------------
@@ -204,15 +206,16 @@ data <- read.csv(".\\01_data\\df_all_T.csv", header=T, sep=";")
 dim(data)
 head(data)
 
-var1 <- data[[1]]
-var2 <- data[[4]]
+varx <- data[[1]]
+vary <- data[[4]]
 color <- data[[6]]
 size <- data[[6]]
 year <- data[[1]]
 ids <- data[[4]]
+xlab <- xlab("year")
+ylab <- ylab("water area Lake Poopó [km²]")
 
-
-anim(data, var1, var2, color, size, year, ids)
+anim(data, varx, vary, color, size, year, ids, xlab, ylab)    # press PLAY button in animation
 
          
 ##########################################################################################
