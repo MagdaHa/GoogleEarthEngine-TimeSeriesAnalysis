@@ -1,8 +1,18 @@
 ##########################################################################################
-#### Generic vizualisation
+#### GEERIC VIZUALISATION
+
 #### author: Magdalena Halbgewachs
 #### August 2019
+#### R version 3.6.1
+
 ##########################################################################################
+
+#### Content: 4 generic functions that display (spatial) data quickly and easily in plots and diagrams.
+
+#### FUNCTION 1: Raster stack time series with LEVELPLOT
+#### FUNCTION 2: Time series plot with GGPLOT
+#### FUNCTIoN 3: Correlation plot with CORRPLOT
+#### FUNCTION 4: Time series animation with GGPLOTLY
 
 ##########################################################################################
 
@@ -17,7 +27,7 @@ library(maptools)
 library(corrplot)
 library(RStoolbox)
 
-
+#Set working directory
 setwd ("C:\\02_Studium\\02_Master\\02_Semester_2\\MET3_Python\\01_final_project\\GoogleEarthEngine-TimeSeriesAnalysis")
 
 ##########################################################################################
@@ -54,6 +64,7 @@ rasterNames  <- gsub("NDWI_","", names(data_stack))
 
 main <- "NDWI\nLake Poopó, Bolivia (1989 - 2018)"
 names.attr <- rasterNames
+
 
 ts_raster(data_stack, main, names.attr)
 
@@ -107,6 +118,7 @@ scale_x_date <- scale_x_date(breaks = as.Date(c("1989-04-01", "1995-04-01", "199
                                 "2005-04-01", "2009-04-01", "2013-04-01",
                                 "2014-04-01", "2015-04-01", "2016-04-01", 
                                 "2017-04-01","2018-04-01")),date_labels = "%Y")
+
 
 ts_plot(df_data, column_x, column_y1, column_y2, xlab, ylab, ggtitle, scale_x_date)
 
@@ -182,6 +194,7 @@ size <- data[[6]]
 year <- data[[2]]
 ids <- data[[1]]
 
+
 anim(data, var1, var2, color, size, year, ids)
 
 
@@ -197,6 +210,7 @@ color <- data[[6]]
 size <- data[[6]]
 year <- data[[1]]
 ids <- data[[4]]
+
 
 anim(data, var1, var2, color, size, year, ids)
 
