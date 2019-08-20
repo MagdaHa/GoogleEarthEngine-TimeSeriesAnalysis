@@ -1,5 +1,5 @@
 ##########################################################################################
-#### GEERIC VIZUALISATION
+#### GENERIC VIZUALISATION
 
 #### author: Magdalena Halbgewachs
 #### August 2019
@@ -29,6 +29,7 @@ library(rasterVis)
 library(maptools)
 library(corrplot)
 library(RStoolbox)
+library(gganimate)
 
 #Set working directory
 setwd ("C:\\02_Studium\\02_Master\\02_Semester_2\\MET3_Python\\01_final_project\\GoogleEarthEngine-TimeSeriesAnalysis")
@@ -125,6 +126,7 @@ scale_x_date <- scale_x_date(breaks = as.Date(c("1989-04-01", "1995-04-01", "199
 
 
 ts_plot(df_data, column_x, column_y1, column_y2, xlab, ylab, ggtitle, scale_x_date)
+
 
 ##########################################################################################
 # 3.) CORRELATIONS
