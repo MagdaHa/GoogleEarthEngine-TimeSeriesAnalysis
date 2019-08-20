@@ -14,6 +14,9 @@
 #### FUNCTIoN 3: Correlation plot with CORRPLOT
 #### FUNCTION 4: Time series animation with GGPLOTLY
 
+
+#### all used datasets are provided in the folder '01_data'.
+
 ##########################################################################################
 
 #loading required packages
@@ -56,7 +59,7 @@ all_datasets
 # Create a raster stack of the NDWI time series
 data_stack <- stack(all_datasets)
 
-# dataset scecific
+# dataset specific
 # view names for each raster layer
 names(data_stack)
 # gsub to modify label names
@@ -70,7 +73,8 @@ ts_raster(data_stack, main, names.attr)
 
 
 ##########################################################################################
-# 2.) TIME SERIES PLOTS 
+# 2.) TIME SERIES PLOTS
+# line plot of different variables within a datatable over a predefined time frame
 ##########################################################################################
 
 #FUNCTION
@@ -121,7 +125,6 @@ scale_x_date <- scale_x_date(breaks = as.Date(c("1989-04-01", "1995-04-01", "199
 
 
 ts_plot(df_data, column_x, column_y1, column_y2, xlab, ylab, ggtitle, scale_x_date)
-
 
 ##########################################################################################
 # 3.) CORRELATIONS
